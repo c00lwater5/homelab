@@ -69,6 +69,17 @@ func main() {
 
 	for _, repo := range config.Repositories {
 		if repo.Migrate.Source != "" {
+			// Re-migrating over an existing repo is a no-op (MigrateRepo
+			// errors out and leaves it as-is), which silently freezes
+			// mirror:false repos at whatever was imported once and lets
+			// mirror:true repos never pick up a config change. Delete first
+			// so each run re-creates the repo to match the current config.
+			_, err = client.DeleteRepo(repo.Owner, repo.Name)
+
+			if err != nil {
+				log.Printf("Delete %s/%s (ok if it doesn't exist yet): %v", repo.Owner, repo.Name, err)
+			}
+
 			_, _, err = client.MigrateRepo(gitea.MigrateRepoOption{
 				RepoName:       repo.Name,
 				RepoOwner:      repo.Owner,
