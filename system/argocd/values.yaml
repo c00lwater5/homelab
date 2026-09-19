@@ -10,6 +10,20 @@ argo-cd:
       resource.customizations.ignoreResourceUpdates.all: |
         jsonPointers:
           - /status
+      # CiliumIdentity objects inherit their labels (including
+      # argocd.argoproj.io/instance) from the pods they represent, so
+      # ArgoCD picks them up as owned by whichever app has Cilium-managed
+      # pods even though no chart ever defines them. They're pure Cilium
+      # runtime state (one per unique pod label set) that Cilium recreates
+      # immediately if pruned - exclude them from tracking entirely rather
+      # than have every app with pods show permanent phantom drift.
+      resource.exclusions: |
+        - apiGroups:
+            - cilium.io
+          kinds:
+            - CiliumIdentity
+          clusters:
+            - "*"
   server:
     ingress:
       enabled: true
