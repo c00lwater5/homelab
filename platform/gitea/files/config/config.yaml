@@ -18,13 +18,3 @@ repositories:
     migrate:
       source: https://github.com/c00lwater5/homelab
       mirror: true
-  - name: blog
-    owner: khuedoan
-    migrate:
-      source: https://github.com/khuedoan/blog
-      mirror: true
-  - name: backstage
-    owner: khuedoan
-    migrate:
-      source: https://github.com/khuedoan/backstage
-      mirror: true
