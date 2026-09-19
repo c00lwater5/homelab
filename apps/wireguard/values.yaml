@@ -61,7 +61,7 @@ app-template:
 
                   [Peer]
                   # homelab
-                  PublicKey = sSAZS1Z3vB7Wx8e2yVqXfeHjgWTa80wnSYoma3mZkiU=
+                  PublicKey = xxxxx1Z3vB7Wx8e2yVqXfeHjgWTa80wnSYoma3mZkiU=
                   AllowedIPs = 172.16.0.1/32, 192.168.0.100/32, 192.168.0.224/27
 
                   [Peer]
@@ -74,16 +74,6 @@ app-template:
                   # Clients
 
                   [Peer]
-                  # khuedoan-ryzentower
-                  PublicKey = qnDY23ZWUOlCRUmB8anpXH1uzX0A17F1YtQJmVi7GWM=
-                  AllowedIPs = 172.16.0.10/32
-
-                  [Peer]
-                  # khuedoan-thinkpadz13
-                  PublicKey = hSVWn2lBasJeueHApQYmYR0s2zNpXrqZX6F8gyEqpy0=
-                  AllowedIPs = 172.16.0.11/32
-
-                  [Peer]
-                  # khuedoan-phone
-                  PublicKey = nITHFdgTkNZOTWeSWqnGXjgwlCJMKRCnnUsjMx2yp2U=
+                  # mukhtaar-phone
+                  PublicKey = xxxxxdgTkNZOTWeSWqnGXjgwlCJMKRCnnUsjMx2yp2U=
                   AllowedIPs = 172.16.0.12/32
