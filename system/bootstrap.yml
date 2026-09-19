@@ -30,7 +30,7 @@
 
     - name: Apply ArgoCD manifests
       kubernetes.core.k8s:
-        resource_definition: "{{ argocd_manifests.stdout }}"
+        resource_definition: "{{ argocd_manifests.stdout | from_yaml_all | list }}"
         apply: true
         server_side_apply:
           field_manager: argocd-controller

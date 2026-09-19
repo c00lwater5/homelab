@@ -11,4 +11,3 @@ metal:
     workers:
       hosts:
         node02: {ansible_host: 192.168.0.6, mac: '08:00:27:64:b6:f9', disk: sda, network_interface: enp0s3}
-        node03: {ansible_host: 192.168.0.7, mac: '08:00:27:c3:b2:09', disk: sda, network_interface: enp0s3}
