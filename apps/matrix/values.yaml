@@ -37,9 +37,19 @@ dendrite:
   postgresql:
     enabled: true
     image:
-      # The dendrite chart's postgresql subchart pin predates Bitnami's
-      # 2025 registry pruning (docker.io/bitnami/* now keeps only the
-      # latest tag per branch); bitnamilegacy keeps the old tags.
-      # https://github.com/bitnami/containers/issues/83267
+      # The dendrite chart's postgresql subchart pins an old tag that
+      # Bitnami pruned in their 2025 registry change
+      # (https://github.com/bitnami/containers/issues/83267). The free
+      # docker.io/bitnami/postgresql repo now only publishes a floating
+      # `latest` tag (no versioned tags), so pin by digest instead of
+      # tag - otherwise a future pod recreation could silently pull a
+      # different major version with no warning.
+      #
+      # This is PostgreSQL 18 (docker.io/bitnami/postgresql:latest
+      # resolved to 18.6 as of 2026-09-19) - a clean upgrade from the
+      # previous 15.1.0, since there was no existing matrix data to
+      # migrate. Re-pin this digest when intentionally upgrading again.
       registry: docker.io
-      repository: bitnamilegacy/postgresql
+      repository: bitnami/postgresql
+      tag: "18.6"
+      digest: sha256:b74b23f091dcc87041bcae557d840c36458af46b955279cb13aedec4c32d7f71
