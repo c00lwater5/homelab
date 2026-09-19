@@ -1,4 +1,7 @@
-iso_url: "https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/39/Server/x86_64/iso/Fedora-Server-dvd-x86_64-39-1.5.iso"
-iso_checksum: "sha256:2755cdff6ac6365c75be60334bf1935ade838fc18de53d4c640a13d3e904f6e9"
+# dl.fedoraproject.org now requires solving a JS proof-of-work challenge
+# (Anubis bot protection) that the get_url task below can't do, so this
+# points at a mirror instead of the official download URL.
+iso_url: "https://mirrors.kernel.org/fedora/releases/44/Server/x86_64/iso/Fedora-Server-dvd-x86_64-44-1.7.iso"
+iso_checksum: "sha256:85837793bfa36db6bc709b4cecd2ec116951b87d9c53c3d95eb2fac8dcf7cf1f"
 timezone: Africa/Johannesburg
 dhcp_proxy: true
