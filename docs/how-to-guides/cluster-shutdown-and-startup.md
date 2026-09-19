@@ -8,6 +8,21 @@ The cluster ships with Rook-Ceph for storage, spread across all nodes, so a
 naive shutdown can leave Ceph mid-rebalance when nodes come back. The steps
 below quiesce Ceph first so the storage layer comes back exactly as it left.
 
+## Prerequisites
+
+Run the commands below from the [development shell](../concepts/development-shell.md):
+
+```sh
+nix develop
+```
+
+This provides `kubectl` and the other tools this runbook uses. You'll also
+need `KUBECONFIG` pointed at the cluster's kubeconfig:
+
+```sh
+export KUBECONFIG=./metal/kubeconfig.yaml
+```
+
 ## Shut down
 
 ### 1. Pause GitOps reconciliation
