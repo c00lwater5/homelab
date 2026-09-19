@@ -36,3 +36,10 @@ dendrite:
         secretName: matrix-tls-certificate
   postgresql:
     enabled: true
+    image:
+      # The dendrite chart's postgresql subchart pin predates Bitnami's
+      # 2025 registry pruning (docker.io/bitnami/* now keeps only the
+      # latest tag per branch); bitnamilegacy keeps the old tags.
+      # https://github.com/bitnami/containers/issues/83267
+      registry: docker.io
+      repository: bitnamilegacy/postgresql
