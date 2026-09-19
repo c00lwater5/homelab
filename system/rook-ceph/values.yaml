@@ -5,6 +5,8 @@ rook-ceph-cluster:
   monitoring:
     enabled: true
     createPrometheusRules: true
+  toolbox:
+    enabled: true
   cephClusterSpec:
     mon:
       count: 3
