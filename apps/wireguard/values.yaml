@@ -62,7 +62,7 @@ app-template:
                   [Peer]
                   # homelab
                   PublicKey = sSAZS1Z3vB7Wx8e2yVqXfeHjgWTa80wnSYoma3mZkiU=
-                  AllowedIPs = 172.16.0.1/32, 192.168.1.100/32, 192.168.1.224/27
+                  AllowedIPs = 172.16.0.1/32, 192.168.0.100/32, 192.168.0.224/27
 
                   [Peer]
                   # horus
