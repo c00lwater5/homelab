@@ -44,6 +44,11 @@ argocd-apps:
       template:
         metadata:
           name: '{{path.basename}}'
+          annotations:
+            # Work around an ArgoCD server-side-diff bug that breaks
+            # comparison after a container list changes (e.g. a Helm chart
+            # bump): https://github.com/argoproj/argo-cd/issues/20792
+            argocd.argoproj.io/compare-options: IncludeMutationWebhook=true
         spec:
           destination:
             name: in-cluster
