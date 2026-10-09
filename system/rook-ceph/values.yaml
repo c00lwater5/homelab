@@ -1,6 +1,13 @@
 rook-ceph:
   monitoring:
     enabled: true
+  csi:
+    # node01 is tainted control-plane only, but still needs to mount volumes
+    # for the Ceph daemons it hosts
+    pluginTolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
 rook-ceph-cluster:
   monitoring:
     enabled: true
@@ -17,6 +24,14 @@ rook-ceph-cluster:
     logCollector:
       enabled: false
     removeOSDsIfOutAndSafeToRemove: true
+    # With only 3 nodes, a mon and an OSD must keep running on the tainted
+    # control-plane node
+    placement:
+      all:
+        tolerations:
+          - key: node-role.kubernetes.io/control-plane
+            operator: Exists
+            effect: NoSchedule
     resources:
       mgr:
         limits:

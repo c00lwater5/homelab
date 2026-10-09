@@ -16,3 +16,7 @@ k3s_server_config:
   disable-network-policy: true
   flannel-backend: none
   secrets-encryption: true
+  # Keep regular workloads off the control-plane node so they can't starve
+  # etcd of memory and disk
+  node-taint:
+    - node-role.kubernetes.io/control-plane:NoSchedule
