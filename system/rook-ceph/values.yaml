@@ -17,6 +17,9 @@ rook-ceph-cluster:
   cephClusterSpec:
     mon:
       count: 3
+      # Only 2 nodes, so one of them has to run two mons to keep an odd
+      # quorum
+      allowMultiplePerNode: true
     mgr:
       count: 2
     dashboard:
@@ -24,8 +27,8 @@ rook-ceph-cluster:
     logCollector:
       enabled: false
     removeOSDsIfOutAndSafeToRemove: true
-    # With only 3 nodes, a mon and an OSD must keep running on the tainted
-    # control-plane node
+    # With only 2 nodes, Ceph mons and an OSD must keep running on the
+    # tainted control-plane node
     placement:
       all:
         tolerations:
