@@ -8,6 +8,63 @@ rook-ceph:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
         effect: NoSchedule
+    # The chart defaults request 400-650m CPU per provisioner pod, but they
+    # idle at 1-2m. On the single worker those requests alone blocked other
+    # pods from scheduling. Memory is unchanged from the chart defaults.
+    csiRBDProvisionerResource: |
+      - name : csi-provisioner
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-resizer
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-attacher
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-snapshotter
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-rbdplugin
+        resource:
+          requests: {memory: 512Mi, cpu: 25m}
+          limits: {memory: 1Gi}
+      - name : csi-omap-generator
+        resource:
+          requests: {memory: 512Mi, cpu: 25m}
+          limits: {memory: 1Gi}
+      - name : liveness-prometheus
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+    csiCephFSProvisionerResource: |
+      - name : csi-provisioner
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-resizer
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-attacher
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-snapshotter
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
+      - name : csi-cephfsplugin
+        resource:
+          requests: {memory: 512Mi, cpu: 25m}
+          limits: {memory: 1Gi}
+      - name : liveness-prometheus
+        resource:
+          requests: {memory: 128Mi, cpu: 10m}
+          limits: {memory: 256Mi}
 rook-ceph-cluster:
   monitoring:
     enabled: true
