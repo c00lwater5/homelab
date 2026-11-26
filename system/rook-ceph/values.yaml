@@ -8,6 +8,9 @@ rook-ceph:
       - key: node-role.kubernetes.io/control-plane
         operator: Exists
         effect: NoSchedule
+    # Anti-affinity puts each replica on its own node, and node01 is reserved
+    # for the control plane, so only one replica can ever be scheduled
+    provisionerReplicas: 1
     # The chart defaults request 400-650m CPU per provisioner pod, but they
     # idle at 1-2m. On the single worker those requests alone blocked other
     # pods from scheduling. Memory is unchanged from the chart defaults.
