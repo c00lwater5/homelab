@@ -62,7 +62,7 @@ in the health section and all PGs `active+clean`.
 ### 3. Cordon the nodes
 
 ```sh
-kubectl cordon node01 node02 node03
+kubectl cordon node01 node02
 ```
 
 This is a full shutdown, not a drain: pods aren't going anywhere else to
@@ -75,7 +75,6 @@ mons coordinated for as long as possible.
 
 ```sh
 ssh root@<node02-ip> shutdown -h now
-ssh root@<node03-ip> shutdown -h now
 ssh root@<node01-ip> shutdown -h now
 ```
 
@@ -115,7 +114,7 @@ OSDs up.
 ### 3. Uncordon the nodes
 
 ```sh
-kubectl uncordon node01 node02 node03
+kubectl uncordon node01 node02
 ```
 
 ### 4. Unset the Ceph maintenance flags
