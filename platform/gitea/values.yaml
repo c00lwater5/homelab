@@ -37,3 +37,27 @@ gitea:
         ENABLED: false
       webhook:
         ALLOWED_HOST_LIST: private
+  # Everything runs on the single worker (node02), which runs out of CPU
+  # requests well before real CPU. The chart's preset asks for 250m per pod
+  # but these idle at well under 100m.
+  postgresql-ha:
+    postgresql:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+          ephemeral-storage: 50Mi
+        limits:
+          cpu: 375m
+          memory: 384Mi
+          ephemeral-storage: 2Gi
+    pgpool:
+      resources:
+        requests:
+          cpu: 100m
+          memory: 256Mi
+          ephemeral-storage: 50Mi
+        limits:
+          cpu: 375m
+          memory: 384Mi
+          ephemeral-storage: 2Gi
